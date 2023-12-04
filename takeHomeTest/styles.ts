@@ -70,7 +70,7 @@ export const styles = StyleSheet.create({
     box: {
       height: 96,
       width: 96,
-      backgroundColor: '#EEE',
+      backgroundColor: '##BADA55',
       margin: 6,
       borderRadius: 4,
       padding: 8,

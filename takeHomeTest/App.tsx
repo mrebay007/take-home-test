@@ -6,6 +6,9 @@
  */
 
 import React from 'react';
+import { ApolloProvider } from '@apollo/client';
+import client from './ApolloClient';
+import ApiRequest from './ApiRequest';
 import type {PropsWithChildren} from 'react';
 import { styles } from './styles';
 import {
@@ -21,17 +24,16 @@ import {
 
 import {
     Colors,
-    DebugInstructions,
-    Header,
-    LearnMoreLinks,
-    ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
 type SectionProps = PropsWithChildren<{
     title: string;
 }>;
 
+
+
 function Section({children, title}: SectionProps): JSX.Element {
+    
     const isDarkMode = useColorScheme() === 'dark';
     return (
         <View style={styles.sectionContainer}>
@@ -63,9 +65,11 @@ function App(): JSX.Element {
     const backgroundStyle = {
         backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
     };
-
+    
     return (
-        <SafeAreaView style={backgroundStyle}>
+        <ApolloProvider client={client}>
+            <ApiRequest />
+            <SafeAreaView style={backgroundStyle}>
             <StatusBar
                 barStyle={isDarkMode ? 'light-content' : 'dark-content'}
                 backgroundColor={backgroundStyle.backgroundColor}
@@ -103,6 +107,8 @@ function App(): JSX.Element {
                 </View>
             </ScrollView>
         </SafeAreaView>
+        </ApolloProvider>
+
     );
 }
 
